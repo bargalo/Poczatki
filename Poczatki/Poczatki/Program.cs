@@ -1,69 +1,48 @@
-﻿int number = 4566;
-string numberAsString  = number.ToString();
-char[] digits = numberAsString.ToArray();
+﻿using Poczatki;
 
-int counter0 = 0;
-int counter1 = 0;
-int counter2 = 0;
-int counter3 = 0;   
-int counter4 = 0;
-int counter5 = 0;
-int counter6 = 0;
-int counter7 = 0;
-int counter8 = 0;
-int counter9 = 0;
+Employee user1 = new Employee("Arek", "Sobczak", 26);
+Employee user2 = new Employee("Wacek", "Lepczynski", 52);
+Employee user3 = new Employee("Ania", "Kowalczyk", 38);
 
 
-foreach (char digit in digits)
+
+user1.AddScore(2);
+user1.AddScore(7);
+user1.AddScore(3);
+user1.AddScore(1);
+user1.AddScore(1);
+
+user2.AddScore(1);
+user2.AddScore(2);
+user2.AddScore(3);
+user2.AddScore(1);
+user2.AddScore(3);
+
+user3.AddScore(5);
+user3.AddScore(2);
+user3.AddScore(4);
+user3.AddScore(4);
+user3.AddScore(6);
+
+List<Employee> employees = new List<Employee>()
 {
-    if(digit == '0')
+    user1 ,user2, user3
+};
+
+int maxResult = -1;
+Employee userWithTopScore = null;
+
+foreach (var employee in employees)
+{
+    if (employee.Result > maxResult)
     {
-        counter0++;
-    }
-    else if(digit == '1')
-    {
-        counter1++;
-    }
-    else if(digit == '2')
-    {
-        counter2++;
-    }
-    else if(digit == '3')
-    {
-        counter3++;
-    }
-    else if(digit == '4')
-    {
-        counter4++;
-    }
-    else if(digit == '5')
-    {
-        counter5++;
-    }
-    else if(digit == '6')
-    {
-        counter6++;
-    }
-    else if(digit == '7')
-    {
-        counter7++;
-    }
-    else if(digit == '8')
-    {  
-        counter8++;
-    }
-    else if (digit == '9')
-    { 
-        counter9++;
+        userWithTopScore = employee;
     }
 }
-Console.WriteLine("0=>" + counter0);
-Console.WriteLine("1=>" + counter1);
-Console.WriteLine("2=>" + counter2);
-Console.WriteLine("3=>" + counter3);
-Console.WriteLine("4=>" + counter4);
-Console.WriteLine("5=>" + counter5);
-Console.WriteLine("6=>" + counter6);
-Console.WriteLine("7=>" + counter7);
-Console.WriteLine("8=>" + counter8);
-Console.WriteLine("9=>" + counter9);
+Console.WriteLine("Pracownik z najwiekszą ilością punktów to =>" + " " + userWithTopScore.Name + " " + userWithTopScore.Surname + " " + userWithTopScore.Age + "lat" + " " + userWithTopScore.Result + "pkt");
+
+
+
+
+
+
