@@ -15,12 +15,12 @@
 Console.WriteLine("Witamy w programie WYZYSK przeznaczonym do oceny pracowników");
 Console.WriteLine("============================================================");
 Console.WriteLine();
-Console.WriteLine("Podaj imię pracownika...");
+Console.WriteLine("Podaj imię pracownika:");
 var name = Console.ReadLine();
-Console.WriteLine("Podaj nazwisko pracownika...");
+Console.WriteLine("Podaj nazwisko pracownika:");
 var surname = Console.ReadLine();
 var employee = new Employee(name, surname);
-Console.WriteLine("Podaj ocenę pracownika");
+Console.WriteLine("Podaj ocenę pracownika:");
 
 while (true)
 {
@@ -32,6 +32,7 @@ while (true)
     if (char.TryParse(input, out var value))
     {
         employee.AddGrade(value);
+        Console.WriteLine("Podaj kolejną ocenę pracownika:");
     }
     else 
     {
