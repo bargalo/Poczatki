@@ -23,23 +23,9 @@
             }
             else
             {
-                Console.WriteLine("invalid grade value");
+                throw new Exception("Invalid grade value");
+                //Console.WriteLine("Invalid grade value");
             }
-        }
-        public void AddGrade(string grade)
-        {
-            if (float.TryParse(grade, out float result))
-            {
-                AddGrade(result);
-            }
-            else
-            {
-                Console.WriteLine("string isnt float");
-            }
-        }
-        public void AddGrade(int grade)
-        {
-            AddGrade((float)grade);
         }
         public void AddGrade(char grade)
         {
@@ -66,9 +52,30 @@
                     AddGrade(20);
                     break;
                 default:
-                    Console.WriteLine("Wrong letter!");
-                    break;
+                    throw new Exception("Wrong letter!");
+                    //Console.WriteLine("Wrong letter!");
+                    //break;
             }
+        }
+        public void AddGrade(string grade)
+        {
+            if (float.TryParse(grade, out float result))
+            {
+                AddGrade(result);
+            }
+            else if (char.TryParse(grade, out char resultChar))
+            {
+                AddGrade(resultChar);
+            }
+            else
+            {
+                throw new Exception("String isnt float");
+                //Console.WriteLine("String isnt float");
+            }
+        }
+        public void AddGrade(int grade)
+        {
+            AddGrade((float)grade);
         }
         public void AddGrade(long grade)
         {

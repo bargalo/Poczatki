@@ -15,11 +15,11 @@
 Console.WriteLine("Witamy w programie WYZYSK przeznaczonym do oceny pracowników");
 Console.WriteLine("============================================================");
 Console.WriteLine();
-Console.WriteLine("Podaj imię pracownika:");
-var name = Console.ReadLine();
-Console.WriteLine("Podaj nazwisko pracownika:");
-var surname = Console.ReadLine();
-var employee = new Employee(name, surname);
+//Console.WriteLine("Podaj imię pracownika:");
+//var name = Console.ReadLine();
+//Console.WriteLine("Podaj nazwisko pracownika:");
+//var surname = Console.ReadLine();
+var employee = new Employee(/*name, surname*/);
 Console.WriteLine("Podaj ocenę pracownika:");
 
 while (true)
@@ -29,16 +29,17 @@ while (true)
     {
         break;
     }
-    if (char.TryParse(input, out var value))
-    {
-        employee.AddGrade(value);
-        Console.WriteLine("Podaj kolejną ocenę pracownika:");
-    }
-    else 
+    //employee.AddGrade(input);
+    //Console.WriteLine("Podaj kolejną ocenę pracownika:");
+    try
     {
         employee.AddGrade(input);
-        Console.WriteLine("Podaj kolejną ocenę pracownika:");
-    } 
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+    Console.WriteLine("Podaj kolejną ocenę pracownika...");
 }
 var stats = employee.GetStatistics();
 Console.WriteLine($" Average: {stats.Average}");
