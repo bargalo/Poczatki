@@ -20,6 +20,7 @@ Console.WriteLine();
 //Console.WriteLine("Podaj nazwisko pracownika:");
 //var surname = Console.ReadLine();
 var employee = new Employee(/*name, surname*/);
+var supervisor = new Supervisor();
 Console.WriteLine("Podaj ocenę pracownika:");
 
 while (true)
@@ -41,8 +42,37 @@ while (true)
     }
     Console.WriteLine("Podaj kolejną ocenę pracownika...");
 }
+Console.WriteLine("Podaj ocenę supervisor'a:");
+while (true)
+{
+    var input = Console.ReadLine();
+    if (input == "q")
+    {
+        break;
+    }
+    try
+    {
+        supervisor.AddGrade(input);
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+    Console.WriteLine("Podaj kolejną ocenę supervisor'a...");
+}
+
+Console.WriteLine("Oceny pracownika:");
+Console.WriteLine("=================");
 var stats = employee.GetStatistics();
 Console.WriteLine($" Average: {stats.Average}");
 Console.WriteLine($" Max: {stats.Max}");
 Console.WriteLine($" Min: {stats.Min}");
 Console.WriteLine($" Rating: {stats.AverageLetter}");
+Console.WriteLine("|||||||||||||||||||||||||||||||");
+Console.WriteLine("Oceny supervisor'a:");
+Console.WriteLine("=================");
+var stats2 = supervisor.GetStatistics();
+Console.WriteLine($" Average: {stats2.Average}");
+Console.WriteLine($" Max: {stats2.Max}");
+Console.WriteLine($" Min: {stats2.Min}");
+Console.WriteLine($" Rating: {stats2.AverageLetter}");
