@@ -14,42 +14,47 @@
 
 Console.WriteLine("Witamy w programie WYZYSK przeznaczonym do oceny pracowników");
 Console.WriteLine("============================================================");
-//Console.WriteLine();
-//Console.WriteLine("Podaj imię pracownika:");
-//var name = Console.ReadLine();
-//Console.WriteLine("Podaj nazwisko pracownika:");
-//var surname = Console.ReadLine();
-//var employee = new EmployeeInFile(name, surname);
-var employee = new EmployeeInMemory("Bartek", "Galant");
+Console.WriteLine();
+Console.WriteLine("Podaj imię pracownika:");
+var name = Console.ReadLine();
+Console.WriteLine("Podaj nazwisko pracownika:");
+var surname = Console.ReadLine();
+//var employeeInFile = new EmployeeInFile(name, surname);
+var employeeInMemory = new EmployeeInMemory(name, surname);
+var employeeInFile = new EmployeeInFile(name, surname);
 //employee.AddGrade(0.5f);
-employee.GradeAdded += EmployeeGradeAdded;
+//employeeInMemory.GradeAdded += EmployeeGradeAdded;
 
-void EmployeeGradeAdded(object sender, EventArgs args)
-{
-    Console.WriteLine("Dodano nową ocenę!");
-}
-employee.AddGrade(0.6f);
+//void EmployeeGradeAdded(object sender, EventArgs args)
+//{
+//    Console.WriteLine("Dodano nową ocenę!");
+//}
 
 //var supervisor = new Supervisor();
-//Console.WriteLine("Podaj ocenę pracownika:");
+Console.WriteLine("Podaj ocenę pracownika:");
 
 while (true)
 {
+    employeeInMemory.GradeAdded += EmployeeGradeAdded;
+    void EmployeeGradeAdded(object sender, EventArgs args)
+    {
+        Console.WriteLine("Dodano nową ocenę!");
+    }
     var input = Console.ReadLine();
     if (input == "q")
     {
         break;
     }
-    //employee.AddGrade(input);
-    //Console.WriteLine("Podaj kolejną ocenę pracownika:");
     try
     {
-        employee.AddGrade(input);
+        employeeInFile.AddGrade(input);
+        employeeInMemory.AddGrade(input);
     }
     catch (Exception e)
     {
         Console.WriteLine(e.Message);
     }
+    employeeInMemory.GradeAdded -= EmployeeGradeAdded;
     Console.WriteLine("Podaj kolejną ocenę pracownika...");
 }
 //Console.WriteLine("Podaj ocenę supervisor'a:");
@@ -73,7 +78,7 @@ while (true)
 
 Console.WriteLine("Oceny pracownika:");
 Console.WriteLine("=================");
-var stats = employee.GetStatistics();
+var stats = employeeInMemory.GetStatistics();
 Console.WriteLine($" Average: {stats.Average}");
 Console.WriteLine($" Max: {stats.Max}");
 Console.WriteLine($" Min: {stats.Min}");

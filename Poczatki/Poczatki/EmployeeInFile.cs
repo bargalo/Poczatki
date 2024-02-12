@@ -1,13 +1,9 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.Metrics;
-using System.Reflection.Metadata.Ecma335;
-using System.Reflection.PortableExecutable;
-using System.Runtime.CompilerServices;
-
-namespace Poczatki
+﻿namespace Poczatki
 {
     public class EmployeeInFile : EmployeeBase
     {
+        public event GradeAddedDelegate GradeAdded;
+
         private const string fileName = "grades.txt";
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
@@ -21,6 +17,11 @@ namespace Poczatki
                 if (grade >= 0 && grade <= 100)
                 {
                     writer.WriteLine(grade);
+                    
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
                 else
                 {
