@@ -3,7 +3,7 @@
     public abstract class EmployeeBase : IEmployee
     {
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
-        public event GradeAddedDelegate GradeAdded;
+        public abstract event GradeAddedDelegate GradeAdded;
         public EmployeeBase(string name, string surname)
         {
             Name = name;

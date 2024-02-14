@@ -78,11 +78,13 @@ while (true)
 
 Console.WriteLine("Oceny pracownika:");
 Console.WriteLine("=================");
-var stats = employeeInMemory.GetStatistics();
+var stats = employeeInFile.GetStatistics();
 Console.WriteLine($" Average: {stats.Average}");
 Console.WriteLine($" Max: {stats.Max}");
 Console.WriteLine($" Min: {stats.Min}");
 Console.WriteLine($" Rating: {stats.AverageLetter}");
+Console.WriteLine($" Count: {stats.Count}");
+Console.WriteLine($" Sum: {stats.Sum}");
 Console.WriteLine("|||||||||||||||||||||||||||||||");
 //Console.WriteLine("Oceny supervisor'a:");
 //Console.WriteLine("=================");

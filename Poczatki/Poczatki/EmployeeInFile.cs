@@ -2,7 +2,7 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
 
         private const string fileName = "grades.txt";
         public EmployeeInFile(string name, string surname)
@@ -12,23 +12,21 @@
 
         public override void AddGrade(float grade)
         {
-            using (var writer = File.AppendText(fileName))
+            if (grade >= 0 && grade <= 100)
             {
-                if (grade >= 0 && grade <= 100)
+                using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
-                    
-                    if (GradeAdded != null)
-                    {
-                        GradeAdded(this, new EventArgs());
-                    }
                 }
-                else
+                if (GradeAdded != null)
                 {
-                    throw new Exception("Invalid grade value");
+                    GradeAdded(this, new EventArgs());
                 }
             }
-
+            else
+            {
+                throw new Exception("Invalid grade value");
+            }
         }
 
         public override void AddGrade(char grade)
@@ -89,51 +87,29 @@
         public override Statistics GetStatistics()
         {
             var stats = new Statistics();
-            stats.Average = 0;
-            stats.Max = float.MinValue;
-            stats.Min = float.MaxValue;
-            var counter = 0;
-
-            if(File.Exists(fileName))
+            
+            if (File.Exists(fileName))
             {
-                using( var reader = File.OpenText(fileName))
+                using (var reader = File.OpenText(fileName))
                 {
                     var line = reader.ReadLine();
                     while (line != null)
                     {
                         var number = float.Parse(line);
-                        stats.Max = Math.Max(stats.Max, number);
-                        stats.Min = Math.Min(stats.Min, number);
-                        stats.Average += number;
-                        counter++;
+                        stats.AddGrade(number);
                         line = reader.ReadLine();
                     }
-                }
-                stats.Average /= counter;
-                switch (stats.Average)
-                {
-                    case var average when average >= 80:
-                        stats.AverageLetter = 'A';
-                        break;
-                    case var average when average >= 60:
-                        stats.AverageLetter = 'B';
-                        break;
-                    case var average when average >= 40:
-                        stats.AverageLetter = 'C';
-                        break;
-                    case var average when average >= 20:
-                        stats.AverageLetter = 'D';
-                        break;
-                    default:
-                        stats.AverageLetter = 'E';
-                        break;
-                }
-
-                
+                }                               
             }
             return stats;
         }
-        
+
+
+
+
+
+
+
         //public override Statistics GetStatistics()
         //{
         //    var gradesFromFile = ReadGradesFromFile();
@@ -195,18 +171,17 @@
         //    return stats;
         //}
     }
-        
-    
+
+
 }
 
-           
-    
-          
-    
-            
-    
 
 
-            
-           
-            
+
+
+
+
+
+
+
+

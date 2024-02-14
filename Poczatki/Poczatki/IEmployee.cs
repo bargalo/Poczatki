@@ -1,4 +1,6 @@
-﻿namespace Poczatki
+﻿using static Poczatki.EmployeeBase;
+
+namespace Poczatki
 {
     public interface IEmployee
     {
@@ -10,5 +12,7 @@
         void AddGrade(int grade);
         void AddGrade(double grade);
         Statistics GetStatistics();
+        
+        event GradeAddedDelegate GradeAdded;
     }
 }
